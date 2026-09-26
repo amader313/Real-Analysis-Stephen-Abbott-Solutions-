@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Abbott 1}
+\author{Ahmad Rifaie}
+\date{September 2026}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\noindent\textbf{Exercise:} Assume $h : \mathbb{R} \to \mathbb{R}$ is continuous on $\mathbb{R}$. Let $K = \{x : h(x) = 0\}$. Show that $K$ is a closed set.
+
+\vspace{0.5em}
+
+\noindent\textbf{Recall:} For $K \subseteq \mathbb{R}$, $K$ is closed $\iff \forall (x_n) \subseteq K$ with $(x_n) \to x$, we have $x \in K$.
+
+\begin{proof}
+Let $(x_n)$ be a sequence in $K$ where $(x_n) \to x$.
+
+Since $x_n \in K$ for all $n \in \mathbb{N}$, we have $h(x_n) = 0$ for all $n \in \mathbb{N}$. Thus,
+\[
+\lim_{n \to \infty} h(x_n) = 0.
+\]
+Because $h$ is continuous on $\mathbb{R}$, it preserves limits:
+\[
+\lim_{n \to \infty} h(x_n) = h\left(\lim_{n \to \infty} x_n\right) = h(x).
+\]
+Equating the limits gives $h(x) = 0$, which implies $x \in K$.
+\end{proof}
+
+\end{document}

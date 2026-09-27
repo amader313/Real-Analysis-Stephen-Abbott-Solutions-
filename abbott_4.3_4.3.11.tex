@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb, amsthm}
+
+\title{Abbott's Understanding Analysis Exercises}
+\author{Ahmad Rifaie}
+\date{27 September 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Exercise 4.3.11 (Contraction Mapping Theorem)}
+
+\noindent\textbf{Problem:} Let $f$ be a function defined on all of $\mathbb{R}$, and assume that there is a constant $c$ such that $0 < c < 1$ and $|f(x) - f(y)| \le c|x - y|$ for all $x, y \in \mathbb{R}$.
+
+\vspace{0.5em}
+\hrule
+\vspace{1em}
+
+\subsection*{(a) Show that $f$ is continuous on $\mathbb{R}$.}
+
+\begin{proof}
+Let $\epsilon > 0$ be given. Choose $\delta = \frac{\epsilon}{c}$.  
+
+For any $x, y \in \mathbb{R}$ with $|x - y| < \delta$, we have:
+\[
+|f(x) - f(y)| \le c|x - y| < c\left(\frac{\epsilon}{c}\right) = \epsilon
+\]
+Thus, $f$ is continuous on $\mathbb{R}$.
+\end{proof}
+
+\vspace{0.5em}
+\hrule
+\vspace{1em}
+
+\subsection*{(b) Pick $y_1 \in \mathbb{R}$ and define $y_{n+1} = f(y_n)$. Show that $(y_n)$ is a Cauchy sequence.}
+
+\begin{proof}
+We want to show that $\forall \epsilon > 0$, $\exists N \in \mathbb{N}$ such that for all $m > n > N$, $|y_m - y_n| < \epsilon$.
+
+\medskip
+For $m > n$, we repeatedly apply the contraction inequality $n - 1$ times:
+\[
+|y_m - y_n| \le c|y_{m-1} - y_{n-1}| \le \dots \le c^{n-1}|y_{m-n+1} - y_1|
+\]
+
+Let $k = m - n + 1$. By the triangle inequality:
+\[
+|y_k - y_1| \le |y_k - y_{k-1}| + |y_{k-1} - y_{k-2}| + \dots + |y_2 - y_1|
+\]
+\[
+\le (c^{k-2} + c^{k-3} + \dots + 1)|y_2 - y_1|
+\]
+\[
+< |y_2 - y_1| \sum_{j=0}^{\infty} c^j = \frac{|y_2 - y_1|}{1 - c}
+\]
+
+Setting $M = \frac{|y_2 - y_1|}{1 - c} > 0$, we have:
+\[
+|y_m - y_n| < c^{n-1} M
+\]
+
+Since $0 < c < 1$, $\lim_{n \to \infty} c^{n-1} = 0$. Given $\epsilon > 0$, choose $N \in \mathbb{N}$ such that $c^{n-1} < \frac{\epsilon}{M}$ for all $n > N$. 
+
+Then for all $m > n > N$:
+\[
+|y_m - y_n| < \left(\frac{\epsilon}{M}\right) M = \epsilon
+\]
+
+Therefore, $(y_n)$ is a Cauchy sequence.
+\end{proof}
+
+\bigskip
+
+\noindent\textbf{(c):} Prove $y$ is a fixed point of $f$ (i.e., $f(y) = y$) and it is unique in this regard.
+
+\begin{proof}
+We have $y_{n+1} = f(y_n)$. Set $y = \lim_{n \to \infty} y_n = \lim_{n \to \infty} y_{n+1}$, as $(y_n)$ is convergent due to being a Cauchy sequence.
+
+Taking limits on both sides:
+\[
+\lim_{n \to \infty} y_{n+1} = \lim_{n \to \infty} f(y_n)
+\]
+Since $f$ is continuous on $\mathbb{R}$:
+\[
+\lim_{n \to \infty} f(y_n) = f\left(\lim_{n \to \infty} y_n\right)
+\]
+\[
+\implies y = f(y).
+\]
+
+\vspace{0.5em}
+
+To show that $y$ is unique, let $(a_n)$ and $(b_n)$ be convergent sequences such that $a_{n+1} = f(a_n)$ and $b_{n+1} = f(b_n)$, where $a_n \to a$ and $b_n \to b$.
+
+By the Algebraic Limit Theorem:
+\[
+a = b + \lim_{n \to \infty} (a_n - b_n)
+\]
+Evaluating the limit:
+\[
+\lim_{n \to \infty} (a_n - b_n) \le \lim_{n \to \infty} |a_n - b_n| \le \lim_{n \to \infty} c^{n-1} |a_1 - b_1| = 0
+\]
+Thus, $\lim_{n \to \infty} (a_n - b_n) = 0$.
+
+\[
+\implies a = b
+\]
+Therefore, $y$ is unique.
+\end{proof}
+
+\end{document}
